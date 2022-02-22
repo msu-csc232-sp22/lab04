@@ -26,74 +26,6 @@ static int earnedPoints{0};
 #endif
 
 #if TEST_TASK2
-namespace
-{
-	class BottomUpDynamicCalculatorTest : public ::testing::Test
-	{
-	protected:
-		/**
-         * Code here will be called immediately after the constructor
-         * right before each test...
-         */
-		void SetUp() override
-		{
-			// intentionally empty in this test
-		}
-
-		/**
-         * Code here will be called immediately after each test
-         * right before the destructor...
-         */
-        void TearDown() override {
-            // intentionally empty in this test
-        }
-
-		// Objects declared here can be used by all tests in this test suite
-	};
-
-	TEST_F(BottomUpDynamicCalculatorTest, FirstBaseCaseTest) 
-	{
-        possiblePoints += 1;
-        DynamicCalculator* calculator = new BottomUpDynamicCalculator{};
-        int expected{1};
-        int actual{calculator->fib(0)};
-        EXPECT_EQ(expected, actual);
-        if (!HasFailure()) 
-		{
-            earnedPoints += 1;
-        }
-    }
-
-	TEST_F(BottomUpDynamicCalculatorTest, SecondBaseCaseTest) 
-	{
-        possiblePoints += 1;
-        DynamicCalculator* calculator = new BottomUpDynamicCalculator{};
-        int expected{1};
-        int actual{calculator->fib(1)};
-        EXPECT_EQ(expected, actual);
-        if (!HasFailure()) 
-		{
-            earnedPoints += 1;
-        }
-    }
-
-	TEST_F(BottomUpDynamicCalculatorTest, BigValueTest) 
-	{
-        possiblePoints += 1;
-        DynamicCalculator* calculator = new BottomUpDynamicCalculator{};
-        int expected{233};
-        int actual{calculator->fib(12)};
-        EXPECT_EQ(expected, actual);
-        if (!HasFailure()) 
-		{
-            earnedPoints += 1;
-        }
-    }
-}
-
-#endif
-
-#if TEST_TASK3
 
 namespace
 {
@@ -150,6 +82,75 @@ namespace
 	{
         possiblePoints += 1;
         DynamicCalculator* calculator = new TopDownDynamicCalculator{};
+        int expected{233};
+        int actual{calculator->fib(12)};
+        EXPECT_EQ(expected, actual);
+        if (!HasFailure()) 
+		{
+            earnedPoints += 1;
+        }
+    }
+}
+
+#endif
+
+#if TEST_TASK3
+
+namespace
+{
+	class BottomUpDynamicCalculatorTest : public ::testing::Test
+	{
+	protected:
+		/**
+         * Code here will be called immediately after the constructor
+         * right before each test...
+         */
+		void SetUp() override
+		{
+			// intentionally empty in this test
+		}
+
+		/**
+         * Code here will be called immediately after each test
+         * right before the destructor...
+         */
+        void TearDown() override {
+            // intentionally empty in this test
+        }
+
+		// Objects declared here can be used by all tests in this test suite
+	};
+
+	TEST_F(BottomUpDynamicCalculatorTest, FirstBaseCaseTest) 
+	{
+        possiblePoints += 1;
+        DynamicCalculator* calculator = new BottomUpDynamicCalculator{};
+        int expected{1};
+        int actual{calculator->fib(0)};
+        EXPECT_EQ(expected, actual);
+        if (!HasFailure()) 
+		{
+            earnedPoints += 1;
+        }
+    }
+
+	TEST_F(BottomUpDynamicCalculatorTest, SecondBaseCaseTest) 
+	{
+        possiblePoints += 1;
+        DynamicCalculator* calculator = new BottomUpDynamicCalculator{};
+        int expected{1};
+        int actual{calculator->fib(1)};
+        EXPECT_EQ(expected, actual);
+        if (!HasFailure()) 
+		{
+            earnedPoints += 1;
+        }
+    }
+
+	TEST_F(BottomUpDynamicCalculatorTest, BigValueTest) 
+	{
+        possiblePoints += 1;
+        DynamicCalculator* calculator = new BottomUpDynamicCalculator{};
         int expected{233};
         int actual{calculator->fib(12)};
         EXPECT_EQ(expected, actual);
