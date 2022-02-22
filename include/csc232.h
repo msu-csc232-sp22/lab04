@@ -16,7 +16,10 @@
 
 #define FALSE 0
 #define TRUE 1
-#define EXECUTE_BLOCK FALSE
+
+#define TEST_TASK1 FALSE
+#define TEST_TASK2 FALSE
+#define TEST_TASK3 FALSE
 
 #include <algorithm>
 #include <cassert>
