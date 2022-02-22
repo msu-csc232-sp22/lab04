@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.16.3-3.22.1)
-# TODO: Search and replace labn with appropriate values in this file
-project(labn)
+project(lab04)
 
 # Set compiler flags based on environment
 if (MSVC)
@@ -21,7 +20,7 @@ elseif((CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -g -std=c++14")
 endif ()
 
-message("CMAKE_CXX_FLAGS =${CMAKE_CXX_FLAGS}")
+message("CMAKE_CXX_FLAGS = ${CMAKE_CXX_FLAGS}")
 
 # GoogleTest requires at least C++11
 set(CMAKE_CXX_STANDARD 14)
@@ -44,43 +43,20 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(labn ${SRC_MAIN_FILES})
-add_executable(labn-demo ${SRC_DEMO_FILES})
-add_executable(labn-tests ${SRC_TEST_FILES})
+add_executable(lab04 ${SRC_MAIN_FILES})
+add_executable(lab04-demo ${SRC_DEMO_FILES})
+add_executable(lab04-tests ${SRC_TEST_FILES})
 
 # Now simply link against gtest or gtest_main as needed.
-target_link_libraries(labn-tests gtest_main)
+target_link_libraries(lab04-tests gtest_main)
 include(GoogleTest)
-gtest_discover_tests(labn-tests)
+gtest_discover_tests(lab04-tests)
 
-target_include_directories(labn PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include ${CMAKE_CURRENT_LIST_DIR}/src)
-target_include_directories(labn-demo PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include ${CMAKE_CURRENT_LIST_DIR}/src)
-target_include_directories(labn-tests PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include ${CMAKE_CURRENT_LIST_DIR}/src)
+target_include_directories(lab04 PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include ${CMAKE_CURRENT_LIST_DIR}/src)
+target_include_directories(lab04-demo PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include ${CMAKE_CURRENT_LIST_DIR}/src)
+target_include_directories(lab04-tests PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include ${CMAKE_CURRENT_LIST_DIR}/src)
 
 # add custom commands that copy data input files to target working directories
-add_custom_command(TARGET labn PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/resource/main_data.txt ${CMAKE_CURRENT_BINARY_DIR})
-add_custom_command(TARGET labn-demo PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/resource/demo_data.txt ${CMAKE_CURRENT_BINARY_DIR})
-add_custom_command(TARGET labn-tests PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/resource/test_data.txt ${CMAKE_CURRENT_BINARY_DIR})
-
-# first we can indicate the documentation build as an option and set it to OFF by default
-option(BUILD_DOC "Build documentation" OFF)
-
-find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
-if (DOXYGEN_FOUND)
-    # set input and output files
-    set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/config/Doxyfile.in)
-    set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
-
-    # request to configure the file
-    configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
-    message("Doxygen build started")
-
-    # note the option ALL which allows to build the config together with the application
-    add_custom_target(doc_doxygen ALL
-            COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-            COMMENT "Generating API documentation with Doxygen"
-            VERBATIM)
-else (DOXYGEN_FOUND)
-    message("Doxygen need to be installed to generate the doxygen documentation")
-endif (DOXYGEN_FOUND)
+add_custom_command(TARGET lab04 PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/resource/main_data.txt ${CMAKE_CURRENT_BINARY_DIR})
+add_custom_command(TARGET lab04-demo PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/resource/demo_data.txt ${CMAKE_CURRENT_BINARY_DIR})
+add_custom_command(TARGET lab04-tests PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/resource/test_data.txt ${CMAKE_CURRENT_BINARY_DIR})
